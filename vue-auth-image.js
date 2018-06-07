@@ -13,15 +13,12 @@
       var imageUrl = binding.value;
       axios({
         method: 'get',
-        url: imageUrl,
-        responseType: 'arraybuffer'
+        url: imageUrl
       })
       .then(function(resp) {
-        var mimeType = resp.headers['content-type'].toLowerCase();
-        var imgBase64 = new Buffer(resp.data, 'binary').toString('base64');
-        el.src = 'data:' + mimeType + ';base64,' + imgBase64;
+        el.src = resp.data;
       }).catch((function() {
-        el.src = imageUrl;
+        el.src = '#'+imageUrl;
       }));
     }
   }
